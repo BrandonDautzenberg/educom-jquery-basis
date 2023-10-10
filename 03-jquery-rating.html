@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>   
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery.js"></script>
+    <script>
+      $(document).ready( function() {
+          let ratingAmount = 0;
+          let totalRatings = 0;
+
+        $(".star").click( function() {
+          const value = $(this).attr('data-value')    
+          ratingAmount ++;
+        
+        $.ajax({
+          url: "https://api.dev-master.ninja/js/rating", 
+          method: "POST", 
+          data: { rating: value },
+          success: function(result) { 
+            totalRatings+= result.rating;
+            average = totalRatings / ratingAmount;         
+            console.log(`total rating: ${totalRatings}`)
+            console.log(`average: ${average}`)
+          }})
+        })
+      })
+    </script>
+  </head>
+  <body>
+
+     <span class="star" data-value="1">*</span>
+     <span class="star" data-value="2">*</span>
+     <span class="star" data-value="3">*</span>
+     <span class="star" data-value="4">*</span>
+     <span class="star" data-value="5">*</span>
+
+  </body>
+</html>
