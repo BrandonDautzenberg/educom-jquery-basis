@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Dynamic Table</title>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
+    <script src="./js/jquery.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      $(document).ready( function() {
+      
+
+        const dTable = $("#theBeatles").DataTable({
+          ajax: "https://api.dev-master.ninja/js/beatles",
+          columns: [
+                { data: "id"},
+                { data: "firstname"},
+                { data: "lastname"},
+                { data: "dateOfBirth"},
+                { data: "email"},
+              ]
+            })
+          // Reload the table every 10 seconds
+          setInterval( function () {
+            dTable.ajax.reload()
+          }, 10000)
+          
+          $("#save").click( function() {
+            const data = {
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            eMail: $("#eMail").val()
+          }
+
+          console.log(data)
+
+          $.ajax({
+            url: "https://api.dev-master.ninja/js/person/save",
+            method: "POST",
+            data: {firstname: data.firstName,
+                   lastname: data.lastName,
+                   email: data.eMail},
+            success: function(data) {        
+            }
+          })
+        })
+        console.log(firstName)
+      })
+      
+    </script>
+  </head>
+  <body>
+    <table id="theBeatles"
+           class="display nowrap dataTable dtr-inline collapsed">
+    <thead>
+      <th>ID</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Date of Birth</th>
+      <th>Email</th>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+    
+    <form id="form">
+      First Name: <input type="text" id="firstName"><br>
+      Last Name: <input type="text" id="lastName"><br>
+      E-Mail: <input type="text" id="eMail"><br>
+    </form>
+    <button id="save">Save</button>
+
+
+  </body>
+</html>
