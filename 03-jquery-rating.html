@@ -11,6 +11,10 @@
         $(".star").click( function() {
           const value = $(this).attr('data-value')    
           ratingAmount ++;
+
+          $(".star").each( (index,elem) => { const itemValue= $(elem).attr('data-value')
+        if(itemValue <= value){ $(elem).addClass('red)')
+      }})
         
         $.ajax({
           url: "https://api.dev-master.ninja/js/rating", 
@@ -21,6 +25,7 @@
             average = totalRatings / ratingAmount;         
             console.log(`total rating: ${totalRatings}`)
             console.log(`average: ${average}`)
+            console.log(`current_rating: ${result.rating}`)
           }})
         })
       })

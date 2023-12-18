@@ -6,15 +6,36 @@
     <script>
       $(document).ready( function() {
 
-        $("#btn").click(function() {
-          $(".window").fadeToggle()
+        $(".star").click( function() {
+          const value = $(this).attr('data-value')
+
+        
+        $.ajax({
+          url: "https://api.dev-master.ninja/js/rating", // The URL of the webservice we need to communicate with
+          method: "POST", // the method used for communication
+          data: { rating: value }, // the data being sent to the server
+          succes: function(result) { // the function that will run upon a succesful transaction
+            console.log('X')
+            
+
+            // opvragen rating
+            // dan naar server sturen
+            // server zegt 'result'
+            // result.result
+
+            // Kijk naar JS Basics Objects
+          }})
         })
-        	
-      });    
+      })
     </script>
   </head>
   <body>
-     <div id="btn" class="button">Click Me!</div>
-     <div class="window">This is the window!</div>
+
+     <span class="star" data-value="1">*</span>
+     <span class="star" data-value="2">*</span>
+     <span class="star" data-value="3">*</span>
+     <span class="star" data-value="4">*</span>
+     <span class="star" data-value="5">*</span>
+
   </body>
 </html>
